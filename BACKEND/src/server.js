@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT= 5000;
+console.log(process.env.PORT)
 
 app.listen(5000, ()=> {
     console.log("server is running on PORT 5000")

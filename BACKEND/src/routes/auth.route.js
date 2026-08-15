@@ -2,16 +2,10 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/signup", (req, res) => {
-    res.send("Sign up route called")
-})
+router.get("/signup", signup)
 
-router.get("/login", (req, res) => {
-    res.send("login route called")
-})
+router.get("/login", login)
 
-router.get("/logout", (req, res) => {
-    res.send("logout route called")
-})
+router.get("/logout", login)
 
 export default router;

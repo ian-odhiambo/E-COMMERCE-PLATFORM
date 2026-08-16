@@ -7,8 +7,10 @@ export const signup = async(req, res) => {
     if(userExists) {
         return res.status(400).json({message: "user already exists"});
     }
-    const user = await user.create({name, email, password})
-}
+    const user = await user.create({name, email, password});
+
+    res.status(201).json({user, message: "User created successfully"})
+};
 export const login = async(req, res) => {
     res.send("login route called");
 }

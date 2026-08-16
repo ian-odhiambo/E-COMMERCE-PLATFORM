@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     ],
     role:{
         type: String,
-        enum: ["user","admin"],
+        enum: ["customer","admin"],
         default: "customer"
     }
 },{
@@ -46,8 +46,8 @@ const User = mongoose.model("User", userSchema);
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
     try{
-        const salt = await bcrypt.gensalt(10);
-        this.pasword = await bcrypt.hash(this.password, salt);
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
         next()
     }catch (error){
         next(error)

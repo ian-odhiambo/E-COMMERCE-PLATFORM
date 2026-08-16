@@ -14,5 +14,4 @@ app.listen(PORT, () => {
   console.log("server is running on http://localhost:" + PORT);
 });
 
-//my database connection string
-//mongodb+srv://theniloticdecor_db_user:cFu7Vow3ZDozPLCN@cluster0.qvt3x8z.mongodb.net/?appName=Cluster0
+

@@ -1,6 +1,7 @@
 import express from "express";
 
 export const signup = async(req, res) => {
+    const { name, email, password } = req.body;
     res.send("sign up route called");
 }
 export const login = async(req, res) => {

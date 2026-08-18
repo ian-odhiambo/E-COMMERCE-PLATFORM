@@ -42,19 +42,19 @@ const userSchema = new mongoose.Schema({
 
 
 //Pre-save hook to hash password beore saving to database
-userSchema.pre("save", function(next) {
-    if (!this.isModified("password")) return next();
+// userSchema.pre("save", function(next) {
+//     if (!this.isModified("password")) return next();
     
-    const user = this;
-    bcrypt.genSalt(10, function(err, salt) {
-        if (err) return next(err);
-        bcrypt.hash(user.password, salt, function(err, hash) {
-            if (err) return next(err);
-            user.password = hash;
-            next();
-        });
-    });
-});
+//     const user = this;
+//     bcrypt.genSalt(10, function(err, salt) {
+//         if (err) return next(err);
+//         bcrypt.hash(user.password, salt, function(err, hash) {
+//             if (err) return next(err);
+//             user.password = hash;
+//             next();
+//         });
+//     });
+// });
 
 userSchema.methods.comparePassword = async function (password) {
     return bcrypt.compare(password, this.password);

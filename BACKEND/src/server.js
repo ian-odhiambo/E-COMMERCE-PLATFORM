@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json()) //allow you to parse the body of the request
 
-app.use("/api/v1/auth", authRoutes);
+app.use(authRoutes);
 
 app.listen(PORT, () => {
   console.log("server is running on http://localhost:" + PORT);

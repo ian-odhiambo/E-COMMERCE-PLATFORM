@@ -70,5 +70,9 @@ export const login = async(req, res) => {
 };
 
 export const logout = async(req, res) => {
-    res.send("logout route called");
+    try{
+        const refreshToken = req.cookies.refreshToken;
+    }catch(error){
+
+    }
 };

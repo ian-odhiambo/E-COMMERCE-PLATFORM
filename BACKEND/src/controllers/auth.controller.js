@@ -2,7 +2,11 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtokens";
 
-const generateTokens = (userId) => {}
+const generateTokens = (userId) => {
+    const accessToken = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+    const refreshToken = jwt.sign({ id: userId }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
+    return { accessToken, refreshToken };
+}
 export const signup = async(req, res) => {  
     const { name, email, password } = req.body;
     try{

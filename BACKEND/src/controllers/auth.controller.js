@@ -22,7 +22,7 @@ export const signup = async(req, res) => {
         });
 
         //authenticate
-        
+        const{ accessToken, refreshToken } = generateTokens(user._id)
 
         res.status(201).json({user, message: "User created successfully"})
     } catch(error) {

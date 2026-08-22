@@ -21,6 +21,7 @@ export const signup = async(req, res) => {
             password: hashedPassword  // ← Use hashed password
         });
 
+        //authenticate
         
 
         res.status(201).json({user, message: "User created successfully"})

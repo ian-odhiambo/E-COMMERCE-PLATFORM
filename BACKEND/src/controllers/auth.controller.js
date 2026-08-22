@@ -1,3 +1,4 @@
+import { redis } from '../libs/redis.js'
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtokens";
@@ -6,6 +7,10 @@ const generateTokens = (userId) => {
     const accessToken = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
     const refreshToken = jwt.sign({ id: userId }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
     return { accessToken, refreshToken };
+};
+
+const storeRefreshToken = async(userId, refreshToken) => {
+    await redis.set(`refresh_token:${userId}`, refreshToken, { EX: 7 * 24 * 60 * 60 }); // Set expiration to 7 days
 }
 export const signup = async(req, res) => {  
     const { name, email, password } = req.body;

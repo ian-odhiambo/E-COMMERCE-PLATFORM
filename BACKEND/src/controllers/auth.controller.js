@@ -13,7 +13,11 @@ const generateTokens = (userId) => {
 const storeRefreshToken = async(userId, refreshToken) => {
     await redis.set(`refresh_token:${userId}`, refreshToken, { EX: 7 * 24 * 60 * 60 }); // Set expiration to 7 days
 }
-
+ const setCookies = (res, accessToken, refreshToken) =>{
+    res.cookie("accessToken", accessToken, {
+        httpOnly: true, // this is responsible for preventing XSS attacks
+    })
+ }
 
 export const signup = async(req, res) => {  
     const { name, email, password } = req.body;

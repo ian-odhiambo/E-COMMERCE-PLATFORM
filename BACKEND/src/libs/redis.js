@@ -11,3 +11,5 @@ const redis = new Redis({
 // Example usage
 // await redis.set("foo", "bar")
 // console.log(await redis.get("foo"))
+
+export { redis };

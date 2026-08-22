@@ -8,7 +8,7 @@
 // // Redis is like a key-value store, think of it like a json
 // await redis.set("foo", "bar");
 // await redis.get("foo");
-import Redis from "ioredis"
+import Redis from "@upstash/redis"
 import dotenv from "dotenv"
 dotenv.config()
 

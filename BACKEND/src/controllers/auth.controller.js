@@ -18,13 +18,13 @@ const storeRefreshToken = async(userId, refreshToken) => {
         httpOnly: true, // this is responsible for preventing XSS attacks, cross site scripting attacks
         secure: process.env.NODE_ENV === "production", // this is responsible for ensuring that the cookie is only sent over HTTPS in production
         sameSite:"strict", // prevents CSRF attacks and cross-site request forgery
-        maxAge: 15 * 60 * 10000,//15 minutes 
+        maxAge: 15 * 60 * 1000//15 minutes 
     })
     res.cookie("refreshToken", refreshToken, {
         httpOnly: true, // this is responsible for preventing XSS attacks, cross site scripting attacks
         secure: process.env.NODE_ENV === "production", // this is responsible for ensuring that the cookie is only sent over HTTPS in production
         sameSite:"strict", // prevents CSRF attacks and cross-site request forgery
-        maxAge: 7 * 24 * 60 * 60,//15 minutes 
+        maxAge: 7 * 24 * 60 * 60 * 1000,//7 days
     })
  }
 

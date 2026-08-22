@@ -42,6 +42,8 @@ const userSchema = new mongoose.Schema({
 
 
 //Pre-save hook to hash password beore saving to database
+//I had to hash the presave hook and call it in the signup controller because it causing the "next function error"
+//So I decided to remove the calling the next function code entirely too
 // userSchema.pre("save", function(next) {
 //     if (!this.isModified("password")) return next();
     

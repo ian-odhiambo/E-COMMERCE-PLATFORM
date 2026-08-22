@@ -1,7 +1,7 @@
 import { redis } from '../libs/redis.js'
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtokens";
+import jwt from "jsonwebtoken";
 
 //This is the piece of code responsible for the generation of access and refresh tokens for user authentication. The `generateTokens` function takes a user ID as input and creates a JWT access token that expires in 15 minutes and a refresh token that expires in 7 days. The `storeRefreshToken` function saves the refresh token in Redis with an expiration time of 7 days, allowing for secure token management and user session handling.
 const generateTokens = (userId) => {
@@ -15,7 +15,7 @@ const storeRefreshToken = async(userId, refreshToken) => {
 }
  const setCookies = (res, accessToken, refreshToken) =>{
     res.cookie("accessToken", accessToken, {
-        httpOnly: true, // this is responsible for preventing XSS attacks
+        httpOnly: true, // this is responsible for preventing XSS attacks, cross site scripting attacks
         secure: process.env.NODE_ENV === "production", // this is responsible for ensuring that the cookie is only sent over HTTPS in production
         sameSite:"strict", // prevents CSRF attacks and cross-site request forgery
     })

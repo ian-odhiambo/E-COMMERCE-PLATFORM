@@ -72,7 +72,7 @@ export const login = async(req, res) => {
         const user = await User.findOne({email})
 
         if(user && (await user.comparePassword(password))) {
-            const {accessToken, refreshToken} = generateToken(user._id)
+            const {accessToken, refreshToken} = generateTokens(user._id)
 
             await storeRefreshToken(user._id,refreshToken)
             setCookies(res,accessToken,refreshToken)

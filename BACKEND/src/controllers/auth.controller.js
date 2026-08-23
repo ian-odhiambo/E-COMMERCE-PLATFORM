@@ -108,4 +108,15 @@ export const logout = async(req, res) => {
 };
 
 //this will refresh the access token
-export const refreshToken = async(req, res) => {}
+export const refreshToken = async(req, res) => {
+    try{
+        const refreshToken = req.cookies.refreshToken;
+        if(!refreshToken) {
+            return res.satus(401).json({message: "No refresh token provided"});
+        }
+
+        const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+    }catch(error){
+
+    }
+}

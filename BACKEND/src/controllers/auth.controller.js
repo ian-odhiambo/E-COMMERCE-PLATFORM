@@ -54,12 +54,12 @@ export const signup = async(req, res) => {
 
         setCookies(res, accessToken, refreshToken);
 
-        res.status(201).json({user: {
+        res.status(201).json( {
             _id: user._id,
             name: user.name,
             email: user.email,
             role: user.role,
-        }, message: "User created successfully"})
+        })
     } catch(error) {
         res.status(500).json({ message: error.message})
     }
@@ -81,7 +81,7 @@ export const login = async(req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
-            })
+            });
         }
     }catch(error){
 

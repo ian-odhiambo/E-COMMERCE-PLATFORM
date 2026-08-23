@@ -75,6 +75,13 @@ export const login = async(req, res) => {
 
             await storeRefreshToken(user._id,refreshToken)
             setCookies(res,accessToken,refreshToken)
+
+            res.json({
+                _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            })
         }
     }catch(error){
 

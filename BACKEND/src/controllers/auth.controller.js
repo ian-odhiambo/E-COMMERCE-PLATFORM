@@ -130,7 +130,10 @@ export const refreshToken = async(req, res) => {
             sameSite: "strict",
             maxAge: 15* 60 * 1000,
         });
-    }catch(error){
 
+        res.json({message: "Token refreshed succesfully"})
+    }catch(error){
+        console.log("Error in refreshToken controller", error.message);
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 }

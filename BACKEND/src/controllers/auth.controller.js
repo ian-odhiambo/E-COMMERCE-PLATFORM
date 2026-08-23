@@ -80,6 +80,6 @@ export const logout = async(req, res) => {
         res.clearCookie("refreshToken");
         res.json({ message: "Logged out successfully"})
     }catch(error){
-        res.status(500).json({ message: error.message})
+        res.status(500).json({ message:"server error", error: error.message})
     }
 };

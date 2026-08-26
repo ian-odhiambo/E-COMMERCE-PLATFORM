@@ -143,4 +143,8 @@ export const refreshToken = async(req, res) => {
         console.log("Error in refreshToken controller", error.message);
         res.status(500).json({ message: "Server error", error: error.message });
     }
-}
+};
+
+
+//TODO: implement get profile
+// export const getProile = async (req, res) => {}

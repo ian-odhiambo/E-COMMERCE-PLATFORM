@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cookieParser from 'cookie-parser'
 
 import authRoutes from "./routes/v1/auth.route.js";
+import productRoutes from "./routes/v1/product.route.js";
+
 import { connectDB } from "./libs/db.js";
 
 dotenv.config();
@@ -14,6 +16,7 @@ app.use(express.json()) //allow you to parse the body of the request
 app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/products", productRoutes);
 
 app.listen(PORT, () => {
   console.log("server is running on http://localhost:" + PORT);

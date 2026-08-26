@@ -18,6 +18,8 @@ export const getFeaturedProducts = async (req, res) => {
         }
 
         //if not in redis, fetch it from mongodb
+        //.lean() is gonna return 
+        //which is good for performance
         featuredProducts = await Product.find({isFeatured: true}).lean();
         
         if(!featuredProducts) {
@@ -25,7 +27,7 @@ export const getFeaturedProducts = async (req, res) => {
         }
 
         //store in redis for future quick access
-
+        
         await redis.set("featured_products", JSON.stringify(featuredproducts));
         res.json(featuredProducts);
     }catch(error){

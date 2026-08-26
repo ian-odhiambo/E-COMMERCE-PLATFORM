@@ -8,35 +8,34 @@ export const protectRoute = async(req, res, next) => {
         if(!accessToken){
             return res.status(401).json({message: "Unauthorised - No access token provided"})
         }
-       try{
-         // Verify the access token here (e.g., using JWT)
-        const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-        const user = await User.findById(decoded.userId).select("-password");
+        try{
+            // Verify the access token here (e.g., using JWT)
+            const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+            //  FIX: Change decoded.userId to decoded.id, dont forget this 
+            const user = await User.findById(decoded.id).select("-password");
 
-        if(!user) {
-            return res.status(401).json({ message: "User not found" });
+            if(!user) {
+                return res.status(401).json({ message: "User not found" });
+            }
+
+            req.user = user;
+            next()
+        } catch(error){
+            if (error.name === "TokenExpiredError"){
+                return res.status(401).json({ message: "Unauthorised - Access token expired" }); 
+            }
+            throw error;
         }
-
-        req.user = user;
-
-        next()
-       }catch(error){
-        if (error.name === "TokenExpiredError"){
-            return res.status(401).json({ message: "Unauthorised -Access token expired" }); 
-        }
-        throw error;
-       }
-    }catch(error){
-
+    } catch(error){
         console.log("Error in the protectRoute middleware", error.message);
-        return res.status(401).json({ message: "Unauthorized- Invalid access token" })
+        return res.status(401).json({ message: "Unauthorized - Invalid access token" });
     }
 };
 
 export const adminRoute = (req, res, next) => {
     if(req.user && req.user.role === "admin") {
         next()
-    }else{
+    } else {
         return res.status(403).json({ message: "Access denied - Admin Only" });
     }
-}
+};

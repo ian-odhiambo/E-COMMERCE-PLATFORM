@@ -1,3 +1,5 @@
+import {redis} from "../libs/redis.js";
+import cloudinary from "../libs/cloudinary.js"
 import Product from '../models/product.model.js'; 
 
 export const getAllProducts = async (req, res) => {
@@ -33,5 +35,19 @@ export const getFeaturedProducts = async (req, res) => {
     }catch(error){
         console.log("Error in the getFeaturedProducts controller", error.message);
         res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
+export const createProduct = async (req, res) => {
+    try{
+
+    }catch(error){
+        const {name, description, price, image, category} = req.body;
+
+        let cloudinaryResponse = null
+
+        if(image){
+            await cloudinary
+        }
     }
 }

@@ -13,6 +13,16 @@ export const getAllProducts = async (req, res) => {
 export const getFeaturedProducts = async (req, res) => {
     try{
         let featuredProducts = await redis.get("featured_products")
+        if(featuredProducts) {
+            res.json(JSON.parse(featured_products))
+        }
+
+        //if not in redis, fetch it from mongodb
+        featuredProducts = await Product.find({isFeatured: true}).lean();
+        
+        if(!featuredProducts) {
+            return res.status(404).json({ messsage: "No featured products found" });
+        }
     }catch(error){
 
     }

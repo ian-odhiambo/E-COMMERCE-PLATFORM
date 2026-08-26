@@ -21,9 +21,15 @@ export const getFeaturedProducts = async (req, res) => {
         featuredProducts = await Product.find({isFeatured: true}).lean();
         
         if(!featuredProducts) {
-            return res.status(404).json({ messsage: "No featured products found" });
+            return res.status(404).json({ message: "No featured products found" });
         }
-    }catch(error){
 
+        //store in redis for future quick access
+
+        await redis.set("featured_products", JSON.stringify(featuredproducts));
+        res.json(featuredProducts);
+    }catch(error){
+        console.log("Error in the getFeaturedProducts controller", error.message);
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 }

@@ -118,6 +118,21 @@ export const getProductsByCategory = async (req, res) => {
         res.json(products);
     }catch(error){
         console.log("Error in getProductByCategory controller", error.message);
-        res.status(500).json({ message: "Server error", error: error.message }):
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
+
+export const toggleFeaturedProduct = async (req, res) => {
+    try{
+        const product = await Product.findById(req.params.id);
+        if(product) {
+            product.isFeatured = !product.isFeatured;
+            const updateProduct = await product.save();
+            await updateFeaturedProductsCache();
+
+            res.json(updateProduct);
+        }
+    }catch(error) {
+
     }
 }

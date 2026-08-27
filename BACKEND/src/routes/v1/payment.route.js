@@ -26,7 +26,15 @@ router.post("/checkout-success", protectRoute, async (req, res) =>{
 
             //create a new order
             const products = JSON.parse(session.metadata.products);
-            const newOrder = new Order
+            const newOrder = new Order({
+                userId: session.metadata.userId,
+                products: product.map(product =>({
+                    quantity: product.quantity,
+                    price: product.price,
+                }))
+                
+            });
+            // await newOrder.save();
         }
     }catch(error){
 

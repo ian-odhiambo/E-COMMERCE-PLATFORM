@@ -31,7 +31,10 @@ router.post("/checkout-success", protectRoute, async (req, res) =>{
                 products: product.map(product =>({
                     quantity: product.quantity,
                     price: product.price,
-                }))
+                })),
+                totalAmount: session.amount_total / 100, //convert from cents to dollars,
+                paymentIntent:session.payment_intent,
+                stripeSessionId: session.id
                 
             });
             // await newOrder.save();

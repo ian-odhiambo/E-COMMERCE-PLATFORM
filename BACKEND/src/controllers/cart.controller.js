@@ -25,11 +25,31 @@ export const removeAllFromCart = async (req, res) => {
         if (!productId) {
             user.carItems = [];
         } else{
-            user.cartItems = user.cartItems.filter((item) => item.id !=== productId);
+            user.cartItems = user.cartItems.filter((item) => item.id !== productId);
         }
         await user.save();
         res.json(user.cartItems);
     }catch(error){
         res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
+
+export const updateQuantity = async (req, res) => {
+    try{
+        const {id:productId} = req.params;
+        const {quantity} = req.body;
+        const user = req.user;
+        const exitingItem = user.cartItems.filter((item) => item.id === productId);
+
+        if(existingItem) {
+            if(quantity === 0) {
+                user.cartItems = user.cartItems.filter((item) => item.id !== productId);
+                await user.save();
+                return res.json(user.cartItems);
+            }
+        }
+
+    }catch(error){
+
     }
 }

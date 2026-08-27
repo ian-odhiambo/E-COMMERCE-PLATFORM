@@ -43,7 +43,8 @@ router.post("/create-checkout-session", protectRoute, async (req, res) => {
         const session = await stripe.checkout.sessions.create({
             payment_method_types:["card",],
             line_items: lineItem,
-            
+            mode: "payment",
+            success_url:"http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
         })
     }catch (error) {
         console.error(error);

@@ -37,7 +37,12 @@ router.post("/checkout-success", protectRoute, async (req, res) =>{
                 stripeSessionId: session.id
                 
             });
-            // await newOrder.save();
+            await newOrder.save();
+            res.status(200).json({
+                success: true,
+                message: "Payment successful, order created, and coupon deactivated if used.",
+                orderId: newOrder._id,
+            })
         }
     }catch(error){
 

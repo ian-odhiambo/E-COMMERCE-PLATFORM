@@ -1,7 +1,7 @@
 import express from "express";
 import { protectRoute } from "../../middleware/auth.middleware.js";
 import { createCheckoutSession } from '../controllers/payment.controller.js';
-import Stripe from 'stripe'; 
+import { stripe } from '../../libs/stripe.js'
 
 const router = express.Router();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); 
@@ -38,5 +38,12 @@ router.post("/create-checkout-session", protectRoute, async (req, res) => {
                 totalAmount = Math.round(totalAmount *  coupon.discountPercentage / 100);
             }
         }
+
+        const session = await stripe
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 export default router;

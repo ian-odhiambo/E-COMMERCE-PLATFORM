@@ -44,13 +44,18 @@ export const createCheckoutSession = async (req, res) => {
                 ?[
                     {
                         coupon: await createStripeCoupon(coupon.discountPercentage)
-                    }
+                    },
                 ]
                 :[],
                 metadata: {
                     userId:req.user._id.toString(),
-                    couponCode:couponCode || ""
-                }
+                    couponCode:couponCode || "",
+                    product.map((p) => ({
+                        id: p._id,
+                        quantity: p.quantity,
+                        price: p.price,
+                    }))
+                },
             });
             
             if(totalAmount >= 20000) {

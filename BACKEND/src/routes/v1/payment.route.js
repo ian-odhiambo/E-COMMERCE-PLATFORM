@@ -1,6 +1,9 @@
 import express from "express";
 import { protectRoute } from "../../middleware/auth.middleware.js";
 import { createCheckoutSession } from '../controllers/payment.controller.js';
+import { stripe } from "../../libs/stripe.js";
+import Coupon from "../../models/coupon.model.js";
+import Order from "../../models/order.model.js"
 
 
 const router = express.Router();
@@ -20,6 +23,10 @@ router.post("/checkout-success", protectRoute, async (req, res) =>{
                     isActive:false
                 })
             }
+
+            //create a new order
+            const products = JSON.parse(session.metadata.products);
+            const newOrder = new Order
         }
     }catch(error){
 

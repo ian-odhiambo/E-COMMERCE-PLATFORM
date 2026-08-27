@@ -129,10 +129,24 @@ export const toggleFeaturedProduct = async (req, res) => {
             product.isFeatured = !product.isFeatured;
             const updateProduct = await product.save();
             await updateFeaturedProductsCache();
-
             res.json(updateProduct);
+        }else {
+            res.status(404).json({message: "Product not found"});
         }
     }catch(error) {
+        console.log("Error in toggleFeaturedProduct controller", error.message);
+        res.status(500).json({message: "Server error", error: error.message});
+    }
+}
 
+async function updateFeaturedProductsCache() {
+    try{
+        // Assuming you have a caching mechanism, e.g., Redis
+        // await cache.set("featuredProducts", JSON.stringify(featuredProducts));
+        const featuredProducts = await Product.find({isFeatured: true}).lean();
+        await redis.set("featured_products", JSON.stringify(featuredProducts));
+        
+    }catch(error){
+        console.log("Error updating featured products cache", error.message);
     }
 }

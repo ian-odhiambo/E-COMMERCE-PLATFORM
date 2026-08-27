@@ -57,7 +57,12 @@ router.post("/create-checkout-session", protectRoute, async (req, res) => {
                 userId:req.user._id.toString(),
                 couponCode:couponCode || ""
             }
-        })
+        });
+        
+        if(totalAmount >= 20000) {
+            await createNewCoupon(req.user._id)
+        }
+        res.status(200).json({ id:session.id, totalAmount })
     }catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
@@ -71,6 +76,18 @@ async function createStripeCoupon(discountPercentage) {
     })
 
     return coupon.id;
+}
+
+async function createNewCoupon(userId){
+    const newCoupon = new Coupon({
+        code: "GIFT" + Math.random().toString(36).substring(2, 8).toUpperCase(),
+        discountPercentage:10,
+        expirationDate: new Date(Date.now() + 30 * 24 * 60 * 1000), //30 days from now
+    })
+
+    await newCoupon.save();
+
+    return newCoupon
 }
 
 export default router;

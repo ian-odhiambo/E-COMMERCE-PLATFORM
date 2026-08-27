@@ -46,11 +46,25 @@ router.post("/create-checkout-session", protectRoute, async (req, res) => {
             mode: "payment",
             success_url:`${process.env.CLIENT_URL}/purchase-success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url:`${process.env.CLIENT_URL}/purchase-cancel`,
+            discount: coupon
+            ?[
+                {
+                    coupon: await createStripeCoupon(coupon.discountPercentage)
+                }
+            ]
+            :[],
         })
     }catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+async function createStripeCoupon(discountPercentage) {
+    const coupon = await stripe.coupon.create({
+        percent_off: discountPercentage,
+        duration: "once",
+    })
+}
 
 export default router;

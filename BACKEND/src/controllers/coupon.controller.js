@@ -6,7 +6,7 @@ export const getCoupon = async (req, res) => {
         res.json(coupon || null);
     }catch(error){
         console.log("Error in getCoupon", error.message);
-        res.status(500).json({ message: "Server error", error: error.message }):
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 } ;
 

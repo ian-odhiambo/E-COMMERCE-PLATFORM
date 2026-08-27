@@ -1,7 +1,7 @@
-exxport const addToCart = async (req, res) => {
+export const addToCart = async (req, res) => {
     try{
 
     }catch(error){
-        
+
     }
 }

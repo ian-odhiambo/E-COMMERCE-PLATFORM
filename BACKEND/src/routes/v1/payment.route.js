@@ -53,6 +53,10 @@ router.post("/create-checkout-session", protectRoute, async (req, res) => {
                 }
             ]
             :[],
+            metadata: {
+                userId:req.user._id.toString(),
+                couponCode:couponCode || ""
+            }
         })
     }catch (error) {
         console.error(error);
@@ -65,6 +69,8 @@ async function createStripeCoupon(discountPercentage) {
         percent_off: discountPercentage,
         duration: "once",
     })
+
+    return coupon.id;
 }
 
 export default router;

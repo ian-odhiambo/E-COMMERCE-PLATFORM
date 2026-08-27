@@ -28,30 +28,15 @@ router.post("/create-checkout-session", protectRoute, async (req, res) => {
                         images: [product.image],
                     },
                     unit_amount: amount,
-                },
-                quantity: product.quantity, 
+                }, 
             };
         });
-
-        
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
-            line_items: lineItems,
-            mode: "payment",
-            success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.CLIENT_URL}/cancel`,
-            metadata: {
-                userId: req.user._id.toString(),
-                couponCode: couponCode || "",
-            },
-        });
-
-        res.status(200).json({ sessionId: session.id, url: session.url });
-
-    } catch (error) { 
-        console.log("Error in create-checkout-session route", error.message);
-        res.status(500).json({ error: error.message });
-    }
-});
+        let coupon = null;
+        if(couponCode) {
+            coupon = await Coupon.findOne({ code:couponCode,userId:req.user._id,isActive:true });
+            if(coupon) {
+                totalAmount = Math.round(totalAmount *  coupon.discountPercentage / 100);
+            }
+        }
 
 export default router;

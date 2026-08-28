@@ -22,4 +22,25 @@ export const getAnalyticsData = async (req, res) => {
         totalSales,
         totalRevenue
     }
+};
+
+export const getDailySalesData = async(startDate, endDate) => {
+    const dailySalesData = await Order.aggregate([
+        {
+            $match: {
+                createdAt: {
+                    $gte: startDate,
+                    $Ite: endDate,
+                },
+            },
+        },
+        {
+            $group: {
+                _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+                sales: { $sum: 1 },
+                revenue: { $sum: "$totalAmount" },
+            },
+        },
+        { $sort: {_id: 1} },
+    ])
 }

@@ -64,4 +64,17 @@ export const getDailySalesData = async(startDate, endDate) => {
 //         revenue: 140.75
 //         },
 // ]
+
+const dateArray = getDatesInRange(startDate, endDate);
+// console.log(dateArray) //dates dating up to today
+}
+
+function getDatesInRange(startDate, endDate) {
+    const dates = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+        dates.push(currentDate.toISOstring().split("T")[0]);
+        currentDate.setDate(currentDate.getDate() + 1)
+    }
 }

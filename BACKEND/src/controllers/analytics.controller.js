@@ -45,9 +45,23 @@ export const getDailySalesData = async(startDate, endDate) => {
 
     ]);
 
-    {
-        _id: "2026-08-18",
-        sales: 12,
-        revenue: 1450.75
-    }
+    //example of dailySalesData
+
+//     [
+//         {
+//         _id: "2026-08-18",
+//         sales: 12,
+//         revenue: 1450.75
+//         },
+//         {
+//         _id: "2026-08-19",
+//         sales: 2,
+//         revenue: 1450.75
+//         },
+//         {
+//         _id: "2026-08-20",
+//         sales: 12,
+//         revenue: 140.75
+//         },
+// ]
 }

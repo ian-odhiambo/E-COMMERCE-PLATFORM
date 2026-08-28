@@ -7,8 +7,12 @@ import { UserPlus, Mail, Lock, User, ArrowRight, Loader }
 const SignUpPage = () => {
     const loading = true;
     const [formData, setFormData] = useState({
-        name:""
-    })
+        name: "",
+        email: "",
+        confirmPassword: "",
+    });
+
+    const handleSu
   return (
     <div>SignUpPage</div>
   )

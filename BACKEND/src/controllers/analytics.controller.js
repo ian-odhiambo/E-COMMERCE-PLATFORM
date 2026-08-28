@@ -25,7 +25,8 @@ export const getAnalyticsData = async (req, res) => {
 };
 
 export const getDailySalesData = async(startDate, endDate) => {
-    const dailySalesData = await Order.aggregate([
+    try{
+        const dailySalesData = await Order.aggregate([
         {
             $match: {
                 createdAt: {
@@ -74,8 +75,12 @@ return dateArray.map(date => {
     return {
         date,
         sales: foundData?.sales || 0,
+        revenue: foundData?.revenue || 0,
+    };
+});
+    }catch(error){
+        throw error
     }
-})
 }
 
 function getDatesInRange(startDate, endDate) {

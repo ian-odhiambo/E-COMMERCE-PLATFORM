@@ -42,5 +42,12 @@ export const getDailySalesData = async(startDate, endDate) => {
             },
         },
         { $sort: {_id: 1} },
-    ])
+
+    ]);
+
+    {
+        _id: "2026-08-18",
+        sales: 12,
+        revenue: 1450.75
+    }
 }

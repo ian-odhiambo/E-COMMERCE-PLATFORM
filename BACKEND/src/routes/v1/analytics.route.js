@@ -7,7 +7,7 @@ router.get("/",protectRoute, adminRoute, async(req, res) => {
     try{
         const analyticsData = await getAnalyticsData();
     }catch(error){
-
+        
     }
 })
 

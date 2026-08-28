@@ -31,6 +31,11 @@ const Navbar = () => {
                         <span className="hidden sm:inline">Dashboard</span>
                     </Link>
                 )}
+                {!user ? (
+                    <button className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md flex items-center transition duration-300 ease-in-out">
+
+                    </button>
+                ): ()}
             </nav>
         </div>
     </header>

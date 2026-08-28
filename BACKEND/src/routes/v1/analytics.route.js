@@ -12,6 +12,11 @@ router.get("/",protectRoute, adminRoute, async(req, res) => {
         const startDate = newDate(endDate.getTime() + 24 * 60 * 60 * 1000); // Add one day to the end date
 
         const dailySalesData = await getDailySalesData(startDate, endDate);
+
+        res.json({
+            analyticsData,
+            dailySalesData
+        })
     }catch(error){
 
     }

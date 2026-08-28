@@ -38,6 +38,8 @@ const SignUpPage = () => {
         >
             <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form onSubmit={handleSubmit} className='space-y-6'>
+
+                    
                     <div>
                         <label htmlFor='name' className="block text-sm font-medium text-gray-300">
                             Full Name
@@ -58,6 +60,7 @@ const SignUpPage = () => {
                         </div>
                     </div>
 
+                    {/* This is for the email address input */}
                     <div>
                         <label htmlFor='email' className="block text-sm font-medium text-gray-300">
                             Email address
@@ -77,7 +80,7 @@ const SignUpPage = () => {
                             />
                         </div>
                     </div>
-
+                    {/* this is for the password field */}
                     <div>
                         <label htmlFor='password' className="block text-sm font-medium text-gray-300">
                             Password
@@ -98,6 +101,7 @@ const SignUpPage = () => {
                         </div>
                     </div>
 
+                    {/* this is for the confirm password input */}
                     <div>
                         <label htmlFor='confirmPassword' className="block text-sm font-medium text-gray-300">
                             Confirm Password
@@ -110,7 +114,7 @@ const SignUpPage = () => {
                                 id='confirmPassword'
                                 type='password'
                                 required
-                                value={ formData.password }
+                                value={ formData.confirmPassword }
                                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                                 className='block w-full px-3 py-2 pl-10 bg-gray-700 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm'
                                 placeholder='*********'

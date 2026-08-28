@@ -8,8 +8,10 @@ router.get("/",protectRoute, adminRoute, async(req, res) => {
     try{
         const analyticsData = await getAnalyticsData();
 
-        const startDate = new Date();
-        const endDate = newDate(endDate.getTime() + 24 * 60 * 60 * 1000); // Add one day to the end date
+        const endDate = new Date();
+        const startDate = newDate(endDate.getTime() + 24 * 60 * 60 * 1000); // Add one day to the end date
+
+        const dailySalesData = await getDailySalesData(startDate, endDate);
     }catch(error){
 
     }

@@ -22,10 +22,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": {
+      "/api/v1": {
         target: "http://localhost:5000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/api/v1'), // Add this line
+        // rewrite: (path) => path.replace(/^\/api/, '/api/v1'), // Add this line
       },
     },
   },

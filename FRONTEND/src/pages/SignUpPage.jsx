@@ -4,7 +4,7 @@ import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 
 const SignUpPage = () => {
-    const loading = false,
+    const loading = false;
     const [formData, setFormData] = useState({
         name: "",
         email: "",

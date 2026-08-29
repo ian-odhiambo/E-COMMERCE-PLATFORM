@@ -89,8 +89,8 @@ const LoginPage = () => {
                             </>
                         ) : (
                             <>
-                            <UserPlus className="mr-2 h-5 w-5"/>
-                            Sign up
+                            <UserPlus className="mr-2 h-5 w-5" aria-hidden="true" />
+                            Login
                             </>
                         )}
                     </button>
@@ -102,4 +102,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default LoginPage;

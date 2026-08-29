@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { LogIn, Mail, Lock, ArrowRight, Loader } from "lucide-react";
+import {  Mail, Lock, ArrowRight, Loader } from "lucide-react";
 
 const LoginPage = () => {
 
@@ -50,8 +50,8 @@ const LoginPage = () => {
                                 id='email'
                                 type='email'
                                 required
-                                value={ formData.email }
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                value={ email }
+                                onChange={(e) => setEmail(e.target.value)}
                                 className='block w-full px-3 py-2 pl-10 bg-gray-700 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm'
                                 placeholder='you@example.com'
                             />
@@ -98,9 +98,9 @@ const LoginPage = () => {
                 </form>
 
                 <p className= "mt-8 text-center text-sm text-gray-400">
-                    Already have an account?{""}
-                    <Link to="/login" className="font-medium text-emerald-400 hover:text-emerald-300">
-                        Login here<ArrowRight className="inline h-4 w-4"/>
+                    Not a member?{""}
+                    <Link to="/signup" className="font-medium text-emerald-400 hover:text-emerald-300">
+                        Sign up now<ArrowRight className="inline h-4 w-4"/>
                     </Link>
                 </p>
             </div>

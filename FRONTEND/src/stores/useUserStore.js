@@ -12,7 +12,15 @@ export const useUserStore = create((set, get) => ({
 
         if(password !== confirmPassword) {
             set({ loading: false });
-            return toast.terror("Passwords do not match");
+            return toast.error("Passwords do not match");
+        }
+
+        try{
+            const res = await axios.post("/auth/signup", {name,email,pasword});
+            set({ user: res.data.user,loading: false });
+        }catch(error){
+            set({ loading: false });
+            toast.error(error.response.data.message || "An error occurred")
         }
     },
 }));

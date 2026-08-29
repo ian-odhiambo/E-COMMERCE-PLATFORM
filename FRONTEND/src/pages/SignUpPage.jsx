@@ -12,11 +12,12 @@ const SignUpPage = () => {
         password: "",
         confirmPassword: "",
     });
-    const { signup, user, loading } = useUserStore(); 
+    const { signup, loading } = useUserStore();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        signup(formData);
+        console.log("called here");
+        signup(formData)
     }
 
     return (

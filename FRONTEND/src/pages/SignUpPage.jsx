@@ -11,6 +11,8 @@ const SignUpPage = () => {
         confirmPassword: "",
     });
 
+    const [signup, user, loading] = useUserStore();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
